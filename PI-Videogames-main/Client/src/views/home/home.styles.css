@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: url(https://th.bing.com/th/id/R.7c97dd1a76a912ef20adee74baf5b068?rik=AWDfXMjJDR9ing&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f7%2f7%2fa%2f609945.jpg&ehk=bG79QbQ5fie0%2fT1O%2bdGqReCrGBljGpDZlGi7ilcni9k%3d&risl=&pid=ImgRaw&r=0);
+    background-size: cover;
+    /* text-align: center; */
+  }
+
+.home-title {
+  margin-top: 75px;
+  margin-bottom: 50px;
+  font-size: 76px;
+  color: #0ccac4;
+  font-family: "Bigelow Rules";
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
