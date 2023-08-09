@@ -23,8 +23,6 @@ const getAllVideogamesHandlers = async (req, res) => {
 
 const getVideogameDetailHandlers = async (req, res) => {
   const { idVideogame } = req.params;
-  
-
   try {
     const videogame = await getVideogameDetail(idVideogame);
     if (!videogame) {

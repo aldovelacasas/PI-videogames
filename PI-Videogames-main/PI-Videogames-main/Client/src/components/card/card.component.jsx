@@ -1,22 +1,18 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './card.styles.css';
 
 
-
-function Card({videogame}) {
-const {name, description, platforms, image, releaseDate, rating} = videogame
+function Card({id, name, description, platforms, image, releaseDate, rating, genres}) {
 
   return (
     <div className="card-container">
-      
+    <Link to={`/detail/${id}`} >
     <h2>{name}</h2>
-    <p>{description}</p>
-    <p>{platforms.join(", ")}</p>
     <img src={image} alt={name} />
-    <p>{releaseDate}</p>
-    <p>{rating}</p>
-
+    <p>{genres}</p>
     
-    
+    </Link> 
     </div>
   );
 }

@@ -1,7 +1,6 @@
-const { Videogame, Genre } = require("../db");
-const axios = require("axios");
+const { Videogame, Genres } = require("../db");
 const { APPI_KEY } = process.env;
-
+const axios = require("axios");
 
 
 // Lógica para crear un videojuego en la base de datos
@@ -23,7 +22,7 @@ const getAllVideogamesDB = async () => {
       const videogamesFromDB = await Videogame.findAll({
         attributes: { exclude: ['createdAt', 'updatedAt'] },
         include: [{
-          model: Genre,
+          model: Genres,
           attributes: ['name'],
           through: { attributes: [] },
           as: 'Genres'
@@ -41,13 +40,14 @@ const getAllVideogamesDB = async () => {
   
       // Mapeamos los resultados de la API para obtener solo los datos que necesitamos
       const mappedResults = apiResults.map((gameData) => ({
+        id: gameData.id,
         name: gameData.name,
         description: gameData.description,
         platforms: gameData.platforms.map((platform) => platform.platform.name),
         image: gameData.background_image,
         releaseDate: gameData.released,
         rating: gameData.rating,
-        Genres: gameData.genres.map((genre) => genre.name),
+        genres: gameData.genres.map((genre) => genre.name),
       }));
   
       // Devolvemos los resultados de la API
@@ -57,36 +57,39 @@ const getAllVideogamesDB = async () => {
     }
   };
 
-   
-
-
-
-
-
-
 
 // Lógica para obtener el detalle de un videojuego por su ID (desde la API o base de datos)
 const getVideogameDetail = async (id) => {
   // Primero intentamos buscar el videojuego en la base de datos
+  if(id.length > 10){
   let videogame = await Videogame.findByPk(id, {
-    include: Genre,
-  });
-
+    attributes: { exclude: ['createdAt', 'updatedAt'] },
+    include: [{
+      model: Genres,
+      attributes: ['name'],
+      through: { attributes: [] },
+      as: 'Genres'
+    }]
+  })
+  return videogame;
+}
   // Si el videojuego no se encuentra en la base de datos, lo buscamos en la API
-  if (!videogame) {
+  
     const response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${APPI_KEY}`);
     const gameData = response.data;
-    videogame = {
-      id: gameData.id,
+
+    
+      const videogame = {
+      id: gameData.id,  
       name: gameData.name,
       description: gameData.description,
       platforms: gameData.platforms.map((platform) => platform.platform.name),
       image: gameData.background_image,
       releaseDate: gameData.released,
       rating: gameData.rating,
-      Genres: gameData.genres.map((genre) => genre.name),
+      genres: gameData.genres.map((genre) => genre.name),
     };
-  }
+  
 
   return videogame;
 };
@@ -99,7 +102,7 @@ const searchVideogamesByNameDB = async (name) => {
         where: {
           name: `${name}`
         },
-        include: Genre,
+        include: Genres,
         limit: 15,
       });
   
@@ -111,7 +114,7 @@ const searchVideogamesByNameDB = async (name) => {
       // Si no encontramos videojuegos en la base de datos, buscamos en la API
       const response = await axios.get(`https://api.rawg.io/api/games?key=${APPI_KEY}&search=${name}`);
       const apiResults = response.data.results;
-      
+       
       // Mapeamos los resultados de la API para obtener solo los datos que necesitamos
       const mappedResults = apiResults.map((gameData) => ({
         id: gameData.id,
@@ -121,7 +124,7 @@ const searchVideogamesByNameDB = async (name) => {
         image: gameData.background_image,
         releaseDate: gameData.released,
         rating: gameData.rating,
-        Genres: gameData.genres.map((genre) => genre.name),
+        genres: gameData.genres.map((genre) => genre.name),
       }));
   
       // Devolvemos la combinación de resultados de la base de datos y la API

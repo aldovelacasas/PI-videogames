@@ -1,18 +1,25 @@
-import './cards.styles.css';
+import React from 'react';
 import Card from '../card/card.component';
 
+import './cards.styles.css';
 
-function Cards({allVideogames}) {
-
-    const videgamesList = allVideogames
-
+function Cards({ allVideogames }) {
   return (
     <div className="card-list">
-      {videgamesList?.map((videogame) => (
-        <Card videogame={videogame}/>
-        
-        ))}
+      {allVideogames.map((videogame) => (
     
+        <Card
+          key={videogame.id}
+          id={videogame.id}
+          name={videogame.name}
+          description={videogame.description}
+          platforms={videogame.platforms}
+          image={videogame.image}
+          releaseDate={videogame.releaseDate}
+          rating={videogame.rating}
+          genres={videogame.genres}
+        />
+      ))}
     </div>
   );
 }

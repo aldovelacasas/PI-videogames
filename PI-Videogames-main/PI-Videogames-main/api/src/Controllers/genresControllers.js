@@ -1,15 +1,15 @@
-const { Genre } = require("../db");
+const { Genres } = require("../db");
 const axios = require("axios");
 const { APPI_KEY } = process.env;
 
 // Lógica para crear un género en la base de datos
 const createGenreDB = async (name) => {
-  return await Genre.create({ name });
+  return await Genres.create({ name });
 };
 
 // Lógica para obtener todos los géneros de la base de datos
 const getAllGenresDB = async () => {
-  return await Genre.findAll();
+  return await Genres.findAll();
 };
 
 // Lógica para obtener los géneros desde la API y guardarlos en la base de datos (si está vacía)
@@ -18,9 +18,9 @@ const getGenresFromAPIAndSaveToDB = async () => {
     const response = await axios.get(`https://api.rawg.io/api/genres?key=${APPI_KEY}`);
     const genres = response.data.results;
 
-    const dbGenres = await Genre.findAll();
+    const dbGenres = await Genres.findAll();
     if (dbGenres.length === 0) {
-      await Genre.bulkCreate(genres);
+      await Genres.bulkCreate(genres);
     }
 
     return genres;

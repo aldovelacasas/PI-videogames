@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
-export const GET_BY_NAME = "GET_BY_NAME"
+export const GET_BY_NAME = "GET_BY_NAME";
+
 
 export function getVideogames() {
     return async function (dispatch) {
@@ -12,7 +13,6 @@ export function getVideogames() {
         })
     }
 }
-
 export function getByName(name) {
     return async function (dispatch) {
         const response = await axios(`http://localhost:3001/videogames/search?name=${name}`)
@@ -22,3 +22,6 @@ export function getByName(name) {
         })
     }
 }
+
+
+
