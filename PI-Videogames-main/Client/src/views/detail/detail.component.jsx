@@ -20,11 +20,20 @@ function Detail() {
   return (
     <div className="detail-container">
       <h1>{videogame.name}</h1>
-      <p>{videogame.description}</p>
-      <p>Plataformas: {videogame.platforms}</p>
+      <h4>DESCRIPCION: {videogame.description?.split("<p>")
+                                    .join("\n")
+                                    .split("<p>")
+                                    .join(" ")
+                                    .split("<br />")
+                                    .join("\n")
+                                    .split(".</p>")
+                                    }
+                                    </h4>
+      <p>PLATAFORMAS: {videogame.platforms}</p>
       <img src={videogame.image} alt={videogame.name} />
-      <p>Fecha de lanzamiento: {videogame.releaseDate}</p>
-      <p>Rating: {videogame.rating}</p>
+      <p>FECHA DE SALIDA: {videogame.releaseDate}</p>
+      <p>RATING: {videogame.rating}</p>
+      <p>GENEROS: {videogame.genres}</p>
     </div>
   );
 }

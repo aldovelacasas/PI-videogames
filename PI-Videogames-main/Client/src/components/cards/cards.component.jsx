@@ -17,6 +17,7 @@ function Cards({ allVideogames }) {
           image={videogame.image}
           releaseDate={videogame.releaseDate}
           rating={videogame.rating}
+          genres={videogame.genres}
         />
       ))}
     </div>

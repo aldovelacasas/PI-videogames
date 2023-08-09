@@ -47,7 +47,7 @@ const getAllVideogamesDB = async () => {
         image: gameData.background_image,
         releaseDate: gameData.released,
         rating: gameData.rating,
-        Genres: gameData.genres.map((genre) => genre.name),
+        genres: gameData.genres.map((genre) => genre.name),
       }));
   
       // Devolvemos los resultados de la API
@@ -87,7 +87,7 @@ const getVideogameDetail = async (id) => {
       image: gameData.background_image,
       releaseDate: gameData.released,
       rating: gameData.rating,
-      Genres: gameData.genres.map((genre) => genre.name),
+      genres: gameData.genres.map((genre) => genre.name),
     };
   
 
@@ -124,7 +124,7 @@ const searchVideogamesByNameDB = async (name) => {
         image: gameData.background_image,
         releaseDate: gameData.released,
         rating: gameData.rating,
-        Genres: gameData.genres.map((genre) => genre.name),
+        genres: gameData.genres.map((genre) => genre.name),
       }));
   
       // Devolvemos la combinación de resultados de la base de datos y la API
