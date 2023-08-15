@@ -1,35 +1,35 @@
-/* card.styles.css */
 
 .card-container {
-  width: 250px;
-  border: 1px solid #1f91cf;
+  width: 210px;
+  border: 1px solid #0f0f0f;
   border-radius: 8px;
   padding: 10px;
   margin: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #1f78b3;
+  background-color: #e9b0d7aa;
 }
 
 .card-container a {
   text-decoration: none;
-  color: #333;
+  color: #240303;
 }
 
 .card-container img {
   width: 100%;
   height: 150px; /* Ajusta esta altura según tu preferencia */
   object-fit: cover; /* Para asegurarse de que la imagen mantenga la relación de aspecto */
-  border-radius: 4px;
+  border-radius: 20px;
 }
 
 .card-container h2 {
   font-size: 1.2rem;
   margin: 10px 0;
+  text-align: center;
 }
 
 .card-container h3 {
   font-size: 1rem;
   margin: 5px 0;
+  text-align: center;
 }
 
-/* Add more styles as needed */

@@ -1,4 +1,3 @@
-/* detail.styles.css */
 
 .detail-container {
   max-width: 400px;
@@ -7,13 +6,17 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color:#e9b0d7aa;
+  display: flex; /* Aplicar un layout flex para alinear verticalmente */
+  flex-direction: column; /* Alinear los elementos verticalmente */
+  align-items: center; /* Centrar horizontalmente */
+  text-align: left; /* Alinear el texto a la izquierda */
 }
 
 .detail-container img {
   max-width: 100%;
   height: auto;
-  max-height: 400px; /* Ajusta esta altura según tus necesidades */
+  max-height: 400px; 
   margin-bottom: 15px;
   border-radius: 4px;
 }
@@ -33,4 +36,3 @@
   margin-bottom: 5px;
 }
 
-/* Add more styles as needed */

@@ -17,13 +17,17 @@ function Detail() {
     return <div>Cargando...</div>;
   }
 
+  const limitedDescription = videogame.description?.slice(0, 300);
+
+   
+
   return (
     <div className="detail-container">
       <p>{id}</p>
       <h1>{videogame.name}</h1>
       <img src={videogame.image} alt={videogame.name} />
       <p>PLATAFORMAS: {videogame.platforms?.join(",")}</p>
-      <h4>DESCRIPCION: {videogame.description?.split("<p>")
+      <h4>DESCRIPCION: {limitedDescription?.split("<p>")
       .join("\n")
       .split("<p>")
       .join(" ")

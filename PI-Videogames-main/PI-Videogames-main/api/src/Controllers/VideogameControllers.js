@@ -32,7 +32,7 @@ const videogames = [] //lista acumulable de los videojuegos
 
    //metemos un lopp para poder traer mas de 20 juegos
    let api = `https://api.rawg.io/api/games?key=${APPI_KEY}`
-   for (let i = 1 ; i <= 5; i++) {
+   for (let i = 1 ; i <= 15; i++) {
   const response = await axios.get(api);
   const apiResults = response.data.results;
 

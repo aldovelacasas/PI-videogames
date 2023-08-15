@@ -12,17 +12,13 @@ function Home() {
     const dispatch = useDispatch();
     const allVideogames = useSelector((state) => state.allVideogames);
     const [currentPage, setCurrentPage] = useState(1);
-     const itemsPerPage = 15;
-
-
-     const indexOfLastItem = currentPage * itemsPerPage;
-     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-     const currentItems = allVideogames.slice(indexOfFirstItem, indexOfLastItem);
-
-
-      
+    const itemsPerPage = 15;
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = allVideogames.slice(indexOfFirstItem, indexOfLastItem);
+    
     useEffect(() => {
-      dispatch(getVideogames());
+    dispatch(getVideogames());
    }, [dispatch,]);
 
  
@@ -40,41 +36,39 @@ function Home() {
     dispatch(sortByRating(value));
 };
 
-function nextPage() {
+  function nextPage() {
   setCurrentPage((prevPage) => prevPage + 1);
 }
 
-function prevPage() {
+  function prevPage() {
   setCurrentPage((prevPage) => prevPage - 1);
 }
-
-
-
-
-
- 
-
- 
-
 
   return (
     <div className="home">
         <h2 className="home-title">Home</h2>
-      <Navbar handleSearch={handleSearch} />
-        <br/>
-        
-        <Link to="/form"><button>formulario</button></Link>
 
-      <div>
-    <select placeholder="A-Z" onChange={handleSort} > 
-    <option hidden="all">A-Z</option>
+    <div className='navbar-container'>
+      <Navbar  handleSearch={handleSearch} />
+      <div className='button-container'>
+    </div>
+   </div>
+   <div className='button-form'>
+       <Link to="/form"><button>Formulario</button></Link>
+   </div>  
+      
+<div>
+  <select placeholder="A-Z" onChange={handleSort} > 
+    <option hidden="all">Ordenar de A-Z</option>
     <option value="Asc">{" "}A-Z{" "}</option>
     <option value="Desc">{" "}Z-A{" "}</option>
-    </select>
-      </div>
+  </select>
+</div>
+
+    
 
 
-     <div>
+<div>
   <select onChange={(e) => handleSortByRating(e.target.value)}>
     <option hidden>Ordenar por Rating</option>
     <option value="RatingAsc">Rating Ascendente</option>
@@ -82,16 +76,18 @@ function prevPage() {
   </select>
 </div>
 
-<div>
+      
+      <Cards allVideogames={currentItems} />
+<div className='button'>
   <button onClick={prevPage} disabled={currentPage === 1}>
-    Previous
+    Prev
   </button>
 
   <span>{currentPage}</span>
   <button onClick={nextPage} disabled={indexOfLastItem >= allVideogames.length}>
     Next
   </button>
-  </div>
+</div>
 
 
 
@@ -108,7 +104,6 @@ function prevPage() {
 
 
 
-      <Cards allVideogames={currentItems} />
       
     </div>
   );
