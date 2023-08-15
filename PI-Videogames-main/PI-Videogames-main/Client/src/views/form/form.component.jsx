@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createVideogame } from '../../redux/action/action'; // Importa la acción correspondien
 
 
 import './form.styles.css';
 
 function Form() {
+  const dispatch = useDispatch();
   const [input, setInput] = useState({
     name: '',
     description: '',
@@ -23,9 +26,31 @@ function Form() {
     });
   };
 
+ 
+
   const handleSubmit = (event) => {
     event.preventDefault();
-   };
+   
+
+   // Validación de campos
+   if (!input.name || !input.description || !input.rating) {
+    // Mostrar mensaje de error
+    alert('Por favor completa todos los campos obligatorios.');
+    return;
+  }
+
+  if (isNaN(input.rating) || input.rating < 1 || input.rating > 10) {
+    // Mostrar mensaje de error
+    alert('El rating debe ser un número entre 1 y 10.');
+    return;
+  }
+
+  // Creación del videojuego
+  dispatch(createVideogame(input)); // Llama a la acción para crear el videojuego
+};
+
+
+
    
    return (
     <div className="form-container">
@@ -38,6 +63,8 @@ function Form() {
     </div>
 
     <form onSubmit={handleSubmit}>
+
+
       <div className="form-group">
         <label>Nombre:</label>
         <input

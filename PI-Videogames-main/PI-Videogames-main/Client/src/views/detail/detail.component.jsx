@@ -19,18 +19,19 @@ function Detail() {
 
   return (
     <div className="detail-container">
+      <p>{id}</p>
       <h1>{videogame.name}</h1>
-      <h4>DESCRIPCION: {videogame.description?.split("<p>")
-                                    .join("\n")
-                                    .split("<p>")
-                                    .join(" ")
-                                    .split("<br />")
-                                    .join("\n")
-                                    .split(".</p>")
-                                    }
-                                    </h4>
-      <p>PLATAFORMAS: {videogame.platforms}</p>
       <img src={videogame.image} alt={videogame.name} />
+      <p>PLATAFORMAS: {videogame.platforms?.join(",")}</p>
+      <h4>DESCRIPCION: {videogame.description?.split("<p>")
+      .join("\n")
+      .split("<p>")
+      .join(" ")
+      .split("<br />")
+      .join("\n")
+      .split(".</p>")
+      }
+      </h4>
       <p>FECHA DE SALIDA: {videogame.releaseDate}</p>
       <p>RATING: {videogame.rating}</p>
       <p>GENEROS: {videogame.genres}</p>
@@ -39,3 +40,13 @@ function Detail() {
 }
 
 export default Detail;
+
+
+// ID.
+// Nombre.
+// Imagen.
+// Plataformas.
+// Descripción.
+// Fecha de lanzamiento.
+// Rating.
+// Géneros.

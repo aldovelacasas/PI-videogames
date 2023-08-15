@@ -8,10 +8,9 @@ function Card({id, name, description, platforms, image, releaseDate, rating, gen
   return (
     <div className="card-container">
     <Link to={`/detail/${id}`} >
-    <h2>{name}</h2>
     <img src={image} alt={name} />
-    <p>{genres}</p>
-    
+    <h2>{name}</h2>
+    <h3>{genres}</h3>
     </Link> 
     </div>
   );
