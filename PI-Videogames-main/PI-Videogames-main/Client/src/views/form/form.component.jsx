@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { createVideogame } from '../../redux/action/action'; // Importa la acción correspondien
+import { useDispatch, useSelector } from 'react-redux';
+import { createVideogame, getGenres } from '../../redux/action/action'; // Importa la acción correspondien
 
 
 import './form.styles.css';
 
 function Form() {
   const dispatch = useDispatch();
+  
+
   const [input, setInput] = useState({
     name: '',
     description: '',
@@ -25,6 +27,10 @@ function Form() {
       [name]: value
     });
   };
+    
+ ;
+
+
 
  
 
@@ -123,6 +129,11 @@ function Form() {
           onChange={handleChange}
         />
       </div>
+      
+    
+   
+
+
 
       <button type="submit" className="button">
         Crear

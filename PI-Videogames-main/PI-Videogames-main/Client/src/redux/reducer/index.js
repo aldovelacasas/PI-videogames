@@ -1,16 +1,19 @@
 import {
   GET_VIDEOGAMES,
   GET_BY_NAME,
-  // GET_ALL_GENRES,
+  GET_GENRES,
   FILTER_BY_NAME,
   SORT_BY_RATING,
   CREATE_VIDEOGAME,
+  // FILTER_BY_ORIGIN,
+  // FILTER_BY_GENRES
     
 } from "../action/action";
 
 let initialState = {
   allVideogames: [],
   videogamesCopy: [],
+  // genres:[],
 
 };
 
@@ -35,9 +38,19 @@ function rootReducer(state = initialState, action) {
           allVideogames: [...state.allVideogames, action.payload], // Agrega el nuevo videojuego al estado
         };
 
-      
+        case GET_GENRES:
+      const genreNames = action.payload.map((genre) => genre.name);
+      return {
+        ...state,
+        genres: genreNames,
+      };
+    
+        // case FILTER_BY_ORIGIN:
+        //   return {
+        //     ...state,
+        //     allVideogames: action.payload,
+        //   };
 
-   
 
             
       case FILTER_BY_NAME:
@@ -82,6 +95,22 @@ function rootReducer(state = initialState, action) {
         sortBy: action.payload
       };
 
+      // case FILTER_BY_GENRES:
+      //   const allVideogamesCopy = state.videogamesCopy;
+      //   const tempVideogames = allVideogamesCopy.filter((videogame) => {
+      //     if (videogame.genres) {
+      //       const genres = videogame.genres.map((genre) => genre.name);
+      //       return genres.includes(action.payload.toLowerCase());
+      //     }
+      //     return null;
+      //   });
+      
+      //   return {
+      //     ...state,
+      //     allVideogames: action.payload === "all" ? allVideogamesCopy : tempVideogames,
+      //   };
+      
+         
          
 
     default:
@@ -90,3 +119,12 @@ function rootReducer(state = initialState, action) {
 }
 
 export default rootReducer;
+
+
+
+
+
+
+
+
+

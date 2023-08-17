@@ -26,7 +26,7 @@ function Detail() {
       <p>{id}</p>
       <h1>{videogame.name}</h1>
       <img src={videogame.image} alt={videogame.name} />
-      <p>PLATAFORMAS: {videogame.platforms?.join(",")}</p>
+      <p>PLATAFORMAS: {videogame.platforms}</p>
       <h4>DESCRIPCION: {limitedDescription?.split("<p>")
       .join("\n")
       .split("<p>")
@@ -46,11 +46,4 @@ function Detail() {
 export default Detail;
 
 
-// ID.
-// Nombre.
-// Imagen.
-// Plataformas.
-// Descripción.
-// Fecha de lanzamiento.
-// Rating.
-// Géneros.
+

@@ -2,10 +2,11 @@ import axios from "axios";
 
 export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
 export const GET_BY_NAME = "GET_BY_NAME";
-// export const GET_ALL_GENRES = "GET_ALL_GENRES"
+export const GET_GENRES = "GET_ALL_GENRES";
 export const FILTER_BY_NAME = "FILTER_BY_NAME";
 export const SORT_BY_RATING = "SORT_BY_RATING";
 export const CREATE_VIDEOGAME = "CREATE_VIDEOGAME"
+// export const FILTER_BY_GENRES = "FILTER_BY_GENRES"
 
 export function getVideogames() {
     return async function (dispatch) {
@@ -25,16 +26,28 @@ export function getByName(name) {
         })
     }
 }
-// export const getAllGenres = () => {
-//   return async (dispatch) => {
-//           const response = await axios("http://localhost:3001/genres")
-//           return dispatch({
-//               type: "GET_ALL_GENRES",
-//               payload: response.data
-//           })     
-//       }
-// }
+export const getGenres = () => {
+  return async function (dispatch)  {
+          const response = await axios("http://localhost:3001/genres")
+              return dispatch({
+              type: "GET_GENRES",
+              payload: response.data
+            })     
+        }
+    }
 
+
+    export function filterByOrigin(origin) {
+        return async function (dispatch) {
+          
+            const response = await axios.get(`http://localhost:3001/videogames?origin=${origin}`);
+             return dispatch({
+              type: "FILTER_BY_ORIGIN",
+              payload: response.data,
+      
+             })
+           }
+        }
 
 export const filterByName = (payload) => {
     return {
@@ -49,19 +62,35 @@ export const sortByRating = (order) => {
   };
 };
 
-
-
+export const filterByGenres = (payload) => {
+	return {
+		type: "FILTER_BY_GENRES",
+		payload,
+	};
+};
 
 export const createVideogame = (formData) => {
     return async function (dispatch) {
-        const response = await axios.post('http://localhost:3001/videogames', formData); // Cambia la URL según tu endpoint
-        // Aquí podrías manejar el resultado o mostrar un mensaje de éxito si lo deseas
+      try {
+        const response = await axios.post('http://localhost:3001/videogames', formData);
         dispatch({
-          type: CREATE_VIDEOGAME,
+          type: "CREATE_VIDEOGAME",
           payload: response.data,
         });
+  
+        // Mostrar el mensaje de éxito
+        alert("¡El videojuego se ha creado con éxito!");
+  
+      } catch (error) {
+        // Manejar el error si la creación falla
+        console.error("Error al crear el videojuego:", error);
+      }
     };
   };
+
+
+
+
 
   
   

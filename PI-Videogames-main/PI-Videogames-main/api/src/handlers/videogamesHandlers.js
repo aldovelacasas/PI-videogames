@@ -1,5 +1,5 @@
 const { createVideogameDB, getAllVideogamesDB, getVideogameDetail, searchVideogamesByNameDB } = require("../Controllers/VideogameControllers");
-//pad vacio de muestra
+
 const createVideogameHandlers = async (req, res) => {
   const { name, description, platforms, image, releaseDate, rating } = req.body;
 

@@ -36,35 +36,61 @@
 //   getGenresFromAPIAndSaveToDB,
 // };
 
-const axios = require('axios');
-const { APPI_KEY } = process.env;
-const { Genres } = require('../db');
 
-const URL = `https://api.rawg.io/api/genres?key=${APPI_KEY}`;
 
-const getGenre = async () => {
-  const response = await axios(URL);
-  const genres = response.data.results;
 
-  const genreRecords = await Promise.all(
-    genres.map(async (genre) => {
-      return await Genres.findOrCreate({
-        where: {
-          id: genre.id,
-        },
-        defaults: {
-          name: genre.name,
-        },
-      });
-    })
-  );
 
-  const savedGenres = genreRecords.map(([genre]) => genre.get());
 
-  console.log(savedGenres);
+// const axios = require('axios');
+// const { APPI_KEY } = process.env;
+// const { Genres } = require('../db');
 
-  return savedGenres;
+// const URL = `https://api.rawg.io/api/genres?key=${APPI_KEY}`;
+
+// const getGenre = async () => {
+//   const response = await axios(URL);
+//   const genres = response.data.results;
+
+//   const genreRecords = await Promise.all(
+//     genres.map(async (genre) => {
+//       return await Genres.findOrCreate({
+//         where: {
+//           id: genre.id,
+//         },
+//         defaults: {
+//           name: genre.name,
+//         },
+//       });
+//     })
+//   );
+
+//   const savedGenres = genreRecords.map(([genre]) => genre.get());
+
+//   console.log(savedGenres);
+
+//   return savedGenres;
+// };
+
+// module.exports = getGenre;
+
+
+
+
+
+
+const {Genres} = require("../db");
+
+const createGenreDb = async (id, name) => {
+  const genre = await Genres.create({id, name});
+  return genre;
 };
 
-module.exports = getGenre;
+const getAllGenres = async () => {
+  const genresDB = await Genres.findAll();
+
+  return genresDB;
+
+};
+
+module.exports = {createGenreDb,getAllGenres};
 

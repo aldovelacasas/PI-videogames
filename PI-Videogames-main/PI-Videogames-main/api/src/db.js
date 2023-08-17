@@ -1,9 +1,10 @@
+const axios = require("axios")
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER, DB_PASSWORD, DB_HOST,URL_GENRES,APPI_KEY
 } = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`, {
@@ -37,6 +38,25 @@ const { Videogame, Genres } = sequelize.models;
 Videogame.belongsToMany(Genres, { through: "videogame_type" });//relaciones de muchos a muchos 
 Genres.belongsToMany(Videogame, { through: "videogame_type" });//relaciones de muchos a muchos
 
+
+const createNewGenreDb = async (id,name) => {
+  const genre = await Genres.create({id, name});
+  return genre;
+};
+let genresAPI=[]
+
+axios.get(`${URL_GENRES}?key=${APPI_KEY}`)
+    .then(response => {
+        // Handle response
+        genresAPI=response.data.results
+        genresAPI.map(element=>{
+          createNewGenreDb(element.id,element.name)
+        })
+
+    })
+    .catch(err => {
+        console.error(err);
+    });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

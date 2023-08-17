@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVideogames, getByName, filterByName, sortByRating,/* getAllGenres, filterByGenres, byOriginFilter*/ } from '../../redux/action/action';
+import { getVideogames, getByName, filterByName, sortByRating, /*getGenres, filterByGenres*/  } from '../../redux/action/action';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/navbar/navbar.component';
 import Cards from '../../components/cards/cards.component';
@@ -11,6 +11,11 @@ import './home.styles.css';
 function Home() {
     const dispatch = useDispatch();
     const allVideogames = useSelector((state) => state.allVideogames);
+    // const genres = useSelector((state) => state.genres)
+    // console.log(genres);
+    
+
+
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 15;
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -19,9 +24,16 @@ function Home() {
     
     useEffect(() => {
     dispatch(getVideogames());
+    // dispatch(getGenres())
    }, [dispatch,]);
 
- 
+
+
+//    const  handleFilterByGenres = (e) => {
+//     e.preventDefault();
+//     dispatch(filterByGenres(e.target.value));
+// }
+  
 
   const handleSort =(event) => {
         event.preventDefault();
@@ -53,6 +65,7 @@ function Home() {
       <div className='button-container'>
     </div>
    </div>
+   
    <div className='button-form'>
        <Link to="/form"><button>Formulario</button></Link>
    </div>  
@@ -65,7 +78,7 @@ function Home() {
   </select>
 </div>
 
-    
+
 
 
 <div>
@@ -76,9 +89,28 @@ function Home() {
   </select>
 </div>
 
-      
+{/* <select onChange={(e) => handleFilterByGenres(e.target.value.toLowerCase())}>
+  <option hidden>Selecciona un género</option>
+  {genres.map((genre, index) => (
+    <option key={index} value={genre}>
+      {genre}
+    </option>
+  ))}
+</select> */}
+
+
+
+
+
+
+
+
+
+
       <Cards allVideogames={currentItems} />
-<div className='button'>
+
+  
+  <div className='button'>
   <button onClick={prevPage} disabled={currentPage === 1}>
     Prev
   </button>
@@ -89,17 +121,7 @@ function Home() {
   </button>
 </div>
 
-
-
-
-    
-
-
-
-
-    
-
-   
+ 
 
 
 
